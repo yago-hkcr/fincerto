@@ -22,6 +22,32 @@
 #vi-frame.vi-end{transition:transform .55s cubic-bezier(.55,0,1,.45),opacity .55s ease,filter .55s ease;transform:scale(.45) translateY(-14px);opacity:0;filter:blur(10px)}
 #vi-frame::before{content:"";position:absolute;inset:-2px;border-radius:28px;padding:2px;background:conic-gradient(from var(--vi-ang),transparent 0deg,rgba(74,222,128,.95) 55deg,transparent 130deg,transparent 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:vi-ring 3s linear infinite;pointer-events:none}
 @keyframes vi-ring{to{--vi-ang:360deg}}
+
+#vi-cinema{position:absolute;inset:0;z-index:8;display:flex;align-items:center;justify-content:center;pointer-events:none;overflow:hidden}
+.vi-cue{position:absolute;left:50%;top:50%;width:min(92%,520px);transform:translate(-50%,-50%) scale(.92);opacity:0;filter:blur(10px);transition:opacity .7s ease,transform .9s cubic-bezier(.2,.85,.2,1),filter .7s ease}
+.vi-cue.show{opacity:1;transform:translate(-50%,-50%) scale(1);filter:blur(0)}
+.vi-cue.hide{opacity:0;transform:translate(-50%,-50%) scale(1.05);filter:blur(8px);transition-duration:.55s}
+.vi-premium{padding:28px 30px 26px;border:1px solid rgba(110,255,163,.26);border-radius:24px;background:linear-gradient(180deg,rgba(4,17,10,.84),rgba(3,8,5,.62));box-shadow:0 24px 80px rgba(0,0,0,.46),inset 0 1px 0 rgba(255,255,255,.05);backdrop-filter:blur(10px);text-align:center}
+.vi-kicker{display:inline-flex;align-items:center;gap:10px;color:#8bffb2;font-size:11px;letter-spacing:.2em;font-weight:800;text-transform:uppercase}
+.vi-kicker::before{content:'';width:26px;height:1px;background:linear-gradient(90deg,transparent,#4ade80);box-shadow:0 0 12px rgba(74,222,128,.75)}
+.vi-brand{margin:10px 0 4px;font-size:clamp(34px,7vw,58px);font-weight:800;letter-spacing:-.055em;color:#f2fff7;text-shadow:0 0 28px rgba(74,222,128,.14)}
+.vi-brand span{color:#4ade80}
+.vi-name{margin-top:14px;font-size:clamp(25px,6vw,42px);font-weight:800;letter-spacing:-.04em;color:#fff}
+.vi-role{margin-top:8px;color:rgba(240,255,246,.78);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.vi-meta{margin-top:12px;color:rgba(240,255,246,.58);font-size:12px}
+.vi-line{width:84px;height:2px;margin:18px auto 0;border-radius:99px;background:linear-gradient(90deg,transparent,#4ade80,transparent);box-shadow:0 0 16px rgba(74,222,128,.55)}
+.vi-social{display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid rgba(110,255,163,.22);border-radius:22px;background:rgba(2,10,6,.78);box-shadow:0 24px 70px rgba(0,0,0,.5);backdrop-filter:blur(12px)}
+.vi-social-icon{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;flex:0 0 auto;background:linear-gradient(135deg,#0e1d13,#0a120d);border:1px solid rgba(110,255,163,.24);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 10px 34px rgba(0,0,0,.35)}
+.vi-social-icon svg{width:30px;height:30px;fill:none;stroke:#8bffb2;stroke-width:1.8}
+.vi-social-copy{text-align:left;min-width:0}
+.vi-social-eyebrow{font-size:10px;letter-spacing:.18em;font-weight:800;color:#7dffab}
+.vi-social-title{margin-top:4px;font-size:17px;font-weight:800;color:#fff}
+.vi-social-handle{margin-top:3px;font-size:12px;color:rgba(240,255,246,.68);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vi-pill{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;padding:10px 13px;border-radius:999px;border:1px solid rgba(74,222,128,.32);background:rgba(74,222,128,.1);color:#b8ffd0;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.vi-scan{position:absolute;left:-20%;right:-20%;top:0;height:2px;background:linear-gradient(90deg,transparent,rgba(139,255,178,.95),transparent);filter:blur(.2px);animation:vi-scan 2.1s linear infinite}
+@keyframes vi-scan{from{transform:translateY(-20px);opacity:0}18%{opacity:1}100%{transform:translateY(180px);opacity:0}}
+@media (max-width:520px){.vi-premium{padding:22px 20px}.vi-social{padding:14px 14px;gap:12px}.vi-social-icon{width:50px;height:50px;border-radius:15px}.vi-pill{padding:9px 10px;font-size:10px}}
+
 #vi-video{width:100%;height:100%;object-fit:cover;display:block;background:#000}
 #vi-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(3,7,5,.32);border:0;cursor:pointer;transition:opacity .45s ease,transform .45s ease}
 #vi-play.vi-hidden{opacity:0;transform:scale(.85);pointer-events:none}
@@ -56,6 +82,41 @@ body.vi-active{overflow:hidden !important;height:100%}
       <span class="vi-ripple"></span><span class="vi-ripple d2"></span><span class="vi-ripple d3"></span>
       <span class="vi-core"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
     </button>
+    <div id="vi-cinema" aria-hidden="true">
+      <div class="vi-cue vi-premium" id="vi-cue-name">
+        <div class="vi-kicker">FinanCerto • apresentação</div>
+        <div class="vi-brand">Finan<span>Certo</span></div>
+        <div class="vi-name">Yago de Assis</div>
+        <div class="vi-role">1º ano • Desenvolvimento de Sistemas</div>
+        <div class="vi-meta">Projeto desenvolvido para a feira de programação</div>
+        <div class="vi-line"></div>
+        <div class="vi-scan"></div>
+      </div>
+
+      <div class="vi-cue vi-social" id="vi-cue-instagram">
+        <div class="vi-social-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"></rect><circle cx="12" cy="12" r="4.1"></circle><circle cx="17.55" cy="6.55" r="1"></circle></svg>
+        </div>
+        <div class="vi-social-copy">
+          <div class="vi-social-eyebrow">INSTAGRAM</div>
+          <div class="vi-social-title">Me acompanha por lá</div>
+          <div class="vi-social-handle">@yago._.assis</div>
+        </div>
+        <div class="vi-pill">Seguir</div>
+      </div>
+
+      <div class="vi-cue vi-social" id="vi-cue-whatsapp">
+        <div class="vi-social-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 11.4a8.15 8.15 0 0 1-12.13 7.1L4 20l1.52-3.89A8.15 8.15 0 1 1 20.2 11.4Z"></path><path d="M8.4 8.1c.3-.3.6-.34.9-.09l1.04 1.03c.24.24.29.55.1.84l-.52.77a6.2 6.2 0 0 0 3.42 3.42l.77-.52c.29-.19.6-.14.84.1l1.03 1.04c.25.3.21.6-.09.9-.5.5-1.07.72-1.68.67-2.02-.18-5.92-3.2-6.6-5.84-.15-.58.05-1.18.59-1.72Z"></path></svg>
+        </div>
+        <div class="vi-social-copy">
+          <div class="vi-social-eyebrow">WHATSAPP</div>
+          <div class="vi-social-title">Fala comigo</div>
+          <div class="vi-social-handle">(19) 99244-0358</div>
+        </div>
+        <div class="vi-pill">Chamar</div>
+      </div>
+    </div>
   </div>
 </div>
 <div id="vi-flash"></div>
@@ -66,12 +127,65 @@ body.vi-active{overflow:hidden !important;height:100%}
       wrap=document.getElementById('vi-wrap'),
       frame=document.getElementById('vi-frame'),
       flash=document.getElementById('vi-flash'),
+      cueName=document.getElementById('vi-cue-name'),
+      cueInstagram=document.getElementById('vi-cue-instagram'),
+      cueWhatsapp=document.getElementById('vi-cue-whatsapp'),
       seenKey='fincerto_video_seen';
 
-  var alreadySeen=false;
-  try {
-    alreadySeen=localStorage.getItem(seenKey)==='1';
-  } catch(e) {}
+  /* AJUSTE ESTES TEMPOS para sincronizar com as falas do seu vídeo.
+     Os valores estão em segundos desde o início do vídeo. */
+  var cueTimes={
+    name:0.8,
+    instagram:6.0,
+    whatsapp:12.0
+  };
+
+  var alreadySeen=false,
+      lastTime=0,
+      currentCue=null,
+      cueState={name:false,instagram:false,whatsapp:false};
+
+  function hideCue(el){
+    if(!el) return;
+    el.classList.remove('show');
+    el.classList.add('hide');
+  }
+
+  function showCue(el,key,duration){
+    if(!el || cueState[key]) return;
+    cueState[key]=true;
+    if(currentCue && currentCue!==el) hideCue(currentCue);
+    currentCue=el;
+    el.classList.remove('hide');
+    void el.offsetWidth;
+    el.classList.add('show');
+    window.setTimeout(function(){ hideCue(el); }, duration || 3600);
+    window.setTimeout(function(){
+      if(currentCue===el) currentCue=null;
+    }, (duration || 3600)+650);
+  }
+
+  function resetCues(){
+    cueState={name:false,instagram:false,whatsapp:false};
+    [cueName,cueInstagram,cueWhatsapp].forEach(function(el){
+      if(!el) return;
+      el.classList.remove('show','hide');
+    });
+    currentCue=null;
+    lastTime=0;
+  }
+
+  function syncCues(){
+    var t=video.currentTime || 0;
+    if(lastTime>t+0.5){ resetCues(); }
+    lastTime=t;
+
+    if(t>=cueTimes.name) showCue(cueName,'name',3600);
+    if(t>=cueTimes.instagram) showCue(cueInstagram,'instagram',3600);
+    if(t>=cueTimes.whatsapp) showCue(cueWhatsapp,'whatsapp',3600);
+  }
+
+  try { alreadySeen=localStorage.getItem(seenKey)==='1'; } catch(e) {}
 
   if(alreadySeen){
     wrap.style.display='none';
@@ -81,19 +195,24 @@ body.vi-active{overflow:hidden !important;height:100%}
 
   play.addEventListener('click',function(){
     video.muted=false;
-    video.play().catch(function(){});
-    play.classList.add('vi-hidden');
+    video.play().then(function(){
+      play.classList.add('vi-hidden');
+    }).catch(function(){
+      video.muted=true;
+      video.play().then(function(){ play.classList.add('vi-hidden'); }).catch(function(){});
+    });
   });
 
-  video.addEventListener('ended',function(){
-    try {
-      localStorage.setItem(seenKey,'1');
-    } catch(e) {}
+  video.addEventListener('timeupdate',syncCues);
+  video.addEventListener('seeked',syncCues);
 
+  video.addEventListener('ended',function(){
+    try { localStorage.setItem(seenKey,'1'); } catch(e) {}
+    [cueName,cueInstagram,cueWhatsapp].forEach(hideCue);
     frame.classList.add('vi-end');
     burst();
     flash.classList.add('vi-go');
-    setTimeout(function(){wrap.classList.add('vi-hide');},260);
+    setTimeout(function(){ wrap.classList.add('vi-hide'); },260);
     setTimeout(function(){
       wrap.style.display='none';
       document.body.classList.remove('vi-active');
