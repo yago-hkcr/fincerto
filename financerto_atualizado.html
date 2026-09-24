@@ -34,6 +34,7 @@
             <div class="btn-group">
                 <a href="#organizacao" class="botao">Começar agora →</a>
                 <a href="#sobre" class="botao secundario">Conheça o projeto</a>
+                <a href="#" class="botao secundario" id="ver-apresentacao">Ver apresentação ↻</a>
             </div>
         </div>
 
@@ -260,6 +261,21 @@
         });
     } else {
         revealTargets.forEach((element) => element.classList.add('active'));
+    }
+
+    const presentationButton = document.getElementById('ver-apresentacao');
+    if (presentationButton) {
+        presentationButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            try {
+                localStorage.removeItem('fincerto_video_seen');
+            } catch (e) {}
+            if (window.parent && window.parent !== window) {
+                window.parent.location.reload();
+            } else {
+                window.location.reload();
+            }
+        });
     }
 </script>
 

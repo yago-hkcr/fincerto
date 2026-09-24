@@ -63,13 +63,29 @@ body.vi-active{overflow:hidden !important;height:100%}
 (function(){
   var video=document.getElementById('vi-video'),play=document.getElementById('vi-play'),
       wrap=document.getElementById('vi-wrap'),frame=document.getElementById('vi-frame'),
-      flash=document.getElementById('vi-flash');
+      flash=document.getElementById('vi-flash'),
+      seenKey='fincerto_video_seen';
+
+  var alreadySeen=false;
+  try {
+    alreadySeen=localStorage.getItem(seenKey)==='1';
+  } catch(e) {}
+
+  if(alreadySeen){
+    wrap.style.display='none';
+    document.body.classList.remove('vi-active');
+    return;
+  }
+
   play.addEventListener('click',function(){
     video.muted=false;
     video.play().catch(function(){});
     play.classList.add('vi-hidden');
   });
   video.addEventListener('ended',function(){
+    try {
+      localStorage.setItem(seenKey,'1');
+    } catch(e) {}
     frame.classList.add('vi-end');
     burst();
     flash.classList.add('vi-go');
