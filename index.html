@@ -61,8 +61,10 @@ body.vi-active{overflow:hidden !important;height:100%}
 <div id="vi-flash"></div>
 <script>
 (function(){
-  var video=document.getElementById('vi-video'),play=document.getElementById('vi-play'),
-      wrap=document.getElementById('vi-wrap'),frame=document.getElementById('vi-frame'),
+  var video=document.getElementById('vi-video'),
+      play=document.getElementById('vi-play'),
+      wrap=document.getElementById('vi-wrap'),
+      frame=document.getElementById('vi-frame'),
       flash=document.getElementById('vi-flash'),
       seenKey='fincerto_video_seen';
 
@@ -82,19 +84,27 @@ body.vi-active{overflow:hidden !important;height:100%}
     video.play().catch(function(){});
     play.classList.add('vi-hidden');
   });
+
   video.addEventListener('ended',function(){
     try {
       localStorage.setItem(seenKey,'1');
     } catch(e) {}
+
     frame.classList.add('vi-end');
     burst();
     flash.classList.add('vi-go');
     setTimeout(function(){wrap.classList.add('vi-hide');},260);
-    setTimeout(function(){wrap.style.display='none';document.body.classList.remove('vi-active');},1750);
+    setTimeout(function(){
+      wrap.style.display='none';
+      document.body.classList.remove('vi-active');
+    },1750);
   });
+
   function burst(){
     for(var i=0;i<26;i++){
-      var a=Math.random()*Math.PI*2,d=110+Math.random()*250,p=document.createElement('div');
+      var a=Math.random()*Math.PI*2,
+          d=110+Math.random()*250,
+          p=document.createElement('div');
       p.className='vi-p';
       p.style.setProperty('--tx',(Math.cos(a)*d)+'px');
       p.style.setProperty('--ty',(Math.sin(a)*d)+'px');
