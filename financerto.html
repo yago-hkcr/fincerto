@@ -269,6 +269,7 @@
             event.preventDefault();
             try {
                 localStorage.removeItem('fincerto_video_seen');
+                localStorage.removeItem('fincerto_video_time');
             } catch (e) {}
 
             if (window.parent && window.parent !== window) {
